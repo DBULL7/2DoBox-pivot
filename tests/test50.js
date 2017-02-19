@@ -30,11 +30,13 @@ function searchTest(driver) {
   driver.findElement(By.id('submit')).click();
 
   // find search and sendKeys 1 to search
-  driver.findElement(By.id('search')).sendKeys('4');
+  driver.findElement(By.id('search')).sendKeys('3');
+
+
 
   driver.sleep(3000).then(function() {
     driver.findElement(By.className('entry-body')).getText().then(function(body){
-      if (body === '44444') {
+      if (body === '33333') {
         console.log('body test passed')
       } else {
         console.log('body test failed')

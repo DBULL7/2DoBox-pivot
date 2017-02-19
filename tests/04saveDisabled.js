@@ -20,12 +20,18 @@ makesCard(driver_chr);
 function makesCard(driver) {
   driver.get('https://dbull7.github.io/2DoBox-pivot/');
 
-  var checkDisabled =
-  driver.findElement(By.id('submit')).isEnabled();
-  if (checkDisabled !== true){
-    console.log('test passed');
+  var isDisabled = driver.findElement(By.id('submit')).getAttribute('disabled');
+  if (isDisabled !== true) {
+    console.log('Test passed')
   } else {
-    console.log('test failed')
+    console.log('Nope')
   }
+  // var checkDisabled =
+  // driver.findElement(By.id('submit')).isEnabled();
+  // if (checkDisabled !== true){
+  //   console.log('test passed');
+  // } else {
+  //   console.log('test failed')
+  // }
   driver.quit();
 }

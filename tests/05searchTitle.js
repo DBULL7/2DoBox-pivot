@@ -12,29 +12,35 @@ var driver_chr = new webdriver.Builder()
     .build();
 
 
-makesCard(driver_fx);
-makesCard(driver_chr);
+searchTest(driver_fx);
+searchTest(driver_chr);
 
-function makesCard(driver) {
+function searchTest(driver) {
   driver.get('https://dbull7.github.io/2DoBox-pivot/');
   driver.findElement(By.id('title-input')).sendKeys('11111');
   driver.findElement(By.id('content-input')).sendKeys('22222');
   driver.findElement(By.id('submit')).click();
 
-  find search and sendKeys 1 to search
+  driver.findElement(By.id('title-input')).sendKeys('33333');
+  driver.findElement(By.id('content-input')).sendKeys('44444');
+  driver.findElement(By.id('submit')).click();
+
+  driver.findElement(By.id('title-input')).sendKeys('55555');
+  driver.findElement(By.id('content-input')).sendKeys('66666');
+  driver.findElement(By.id('submit')).click();
+
+  // find search and sendKeys 1 to search
+  driver.findElement(By.id('search')).sendKeys('5');
 
   driver.sleep(3000).then(function() {
     driver.findElement(By.className('entry-title')).getText().then(function(title){
-      if (title === "11111") {
-        console.log('test passed')
+      if (title == "55555") {
+        console.log('title test passed')
       } else {
-        console.log('test failed')
+        console.log('title test failed')
       }
     })
   });
-
-
-
   driver.quit();
 
 }

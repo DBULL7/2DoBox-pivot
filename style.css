@@ -44,7 +44,7 @@ article {
   width: 90%;
 }
 
-.new-idea {
+.card {
   text-align: left;
 }
 
@@ -74,18 +74,18 @@ hr {
   width: 80%;
 }
 
-.entry-title, .entry-body {
+.card-title, .card-body {
   margin-left: 15px;
   max-width: 15ch;
   text-align: left;
 }
 
-.entry-title {
+.card-title {
   display: inline-block;
   font-size: 24px;
 }
 
-.entry-body {
+.card-body {
   color: #939598;
   display: block;
   font-size: 16px;
@@ -123,11 +123,11 @@ button {
   outline: none;
 }
 
-#ideabox {
+#idea-styler {
   color: #00a79d;
 }
 
-#submit {
+#save-button {
   background-color: #00a79d;
   border-radius: 0px;
   display: block;
@@ -139,11 +139,11 @@ button {
   width: 82%;
 }
 
-#submit:hover {
+#save-button:hover {
   background-color: #045e55;
 }
 
-#submit:disabled {
+#save-button:disabled {
   background-color: #6D6E71;
 }
 
@@ -207,7 +207,7 @@ button {
     width: 500px;
   }
 
-  .entry-title, .entry-body {
+  .card-title, .card-body {
     max-width: 25ch;
   }
 }
@@ -242,15 +242,15 @@ button {
     width: 80%;
   }
 
-  .entry-title, .entry-body {
+  .card-title, .card-body {
     max-width: 35ch;
   }
 
-  .entry-title, .entry-body, .upvote {
+  .card-title, .card-body, .upvote {
     margin-left: 0;
   }
 
-  .new-idea {
+  .card {
     width: 80%;
     margin-left: auto;
     margin-right: auto;

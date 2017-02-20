@@ -1,10 +1,13 @@
 var data = [];
 
+//on page load
 $(document).ready(function() {
     getIdea();
     printIdea();
 })
 
+
+//Card Constructor
 function Card(storeIdeaTitle, storeIdeaContent) {
     this.title = storeIdeaTitle;
     this.body = storeIdeaContent;
@@ -12,17 +15,21 @@ function Card(storeIdeaTitle, storeIdeaContent) {
     this.id = Date.now();
 }
 
+
 function storeIdea() {
     var stringData = JSON.stringify(data);
     localStorage.setItem("Data Item", stringData);
 }
 
+
 function getIdea() {
     var storedData = localStorage.getItem("Data Item") || '[]';
     var parsedData = JSON.parse(storedData);
-    data = parsedData;
+    data = parsedData;  //Undeclared var so it's global
 }
 
+
+// Clears card section, then generates cards from local storage
 function printIdea() {
     $("#card-section").html('');
     data.forEach(function(object) {
@@ -43,60 +50,10 @@ function printIdea() {
     });
 }
 
-function clearInput() {
-    $('#title-input').val('');
-    $('#content-input').val('');
-}
 
-function editQuality(location, qualityVar) {
-    var objectId = $(location).parent().parent().attr("id");
-    data = JSON.parse(localStorage.getItem("Data Item"));
-    data.forEach(function(object) {
-        if (object.id == objectId) {
-            object.quality = qualityVar;
-            return object.quality;
-        }
-    });
-    stringData = JSON.stringify(data);
-    localStorage.setItem("Data Item", stringData);
-}
 
-function editTitleText(location, newText) {
-    var objectId = $(location).parent().parent().attr('id');
-    data = JSON.parse(localStorage.getItem('Data Item'));
-    data.forEach(function(object) {
-        if (object.id == objectId) {
-            object.title = newText;
-            return object.title;
-        }
-    });
-    stringData = JSON.stringify(data);
-    localStorage.setItem("Data Item", stringData);
-}
-
-function editBodyText(location, newText) {
-    var objectId = $(location).parent().parent().attr('id');
-    data = JSON.parse(localStorage.getItem('Data Item'));
-    data.forEach(function(object) {
-        if (object.id == objectId) {
-            object.body = newText;
-            return object.body;
-        }
-    });
-    stringData = JSON.stringify(data);
-    localStorage.setItem("Data Item", stringData);
-}
-
-function clear(location, idOfRemoved) {
-    var objectId = $(location).parent().parent().attr("id");
-    var removedId = idOfRemoved;
-    data = JSON.parse(localStorage.getItem("Data Item"));
-    data = data.filter(function(object) {
-        return object.id % objectId;
-    });
-    stringData = JSON.stringify(data);
-    localStorage.setItem("Data Item", stringData);
-}
+////////////////// Event Listener to Disable/////////////////
+$("#title-input, #content-input").on("keyup", disableEnter);
 
 function disableEnter() {
     if ($("#title-input").val().length > 0 && $("#content-input").val().length > 0) {
@@ -106,7 +63,8 @@ function disableEnter() {
     }
 }
 
-$("#title-input, #content-input").on("keyup", disableEnter);
+
+///////////////Submit //////////////////////////////////////
 
 $("#submit").on('click', function(e) {
     e.preventDefault();
@@ -120,6 +78,10 @@ $("#submit").on('click', function(e) {
     disableEnter();
 })
 
+//////////////////Upvote and Downvote////////////////////////
+
+
+//Upvote
 $("#card-section").on('click', '.upvote', function() {
     var qualityVar = $(this).siblings(".quality").text();
     if ($(this).siblings(".quality").text() === "swill") {
@@ -135,6 +97,8 @@ $("#card-section").on('click', '.upvote', function() {
     }
 });
 
+
+//Downvote
 $("#card-section").on('click', '.downvote', function() {
     var qualityVar = $(this).siblings(".quality").text();
     if ($(this).siblings(".quality").text() === "genius") {
@@ -150,24 +114,85 @@ $("#card-section").on('click', '.downvote', function() {
     }
 });
 
+//Stores the new vote quality to local storage
+function editQuality(location, qualityVar) {
+    var objectId = $(location).parent().parent().attr("id");
+    data = JSON.parse(localStorage.getItem("Data Item"));
+    data.forEach(function(object) {
+        if (object.id == objectId) {
+            object.quality = qualityVar;
+            return object.quality;
+        }
+    });
+    stringData = JSON.stringify(data);
+    localStorage.setItem("Data Item", stringData);
+}
+
+///////////////Content Editable //////////////////////////////////////////////
+
+//Edit Card Title
 $('#card-section').on('blur', '.entry-title', function(e) {
     var newTitleText = $(this).text();
     editTitleText(this, newTitleText);
 });
 
+
+function editTitleText(location, newText) {
+    var objectId = $(location).parent().parent().attr('id');
+    data = JSON.parse(localStorage.getItem('Data Item'));
+    data.forEach(function(object) {
+        if (object.id == objectId) {
+            object.title = newText;
+            return object.title;
+        }
+    });
+    stringData = JSON.stringify(data);
+    localStorage.setItem("Data Item", stringData);
+}
+
+//Edit Card Body
 $('#card-section').on('blur', '.entry-body', function() {
     var newBodyText = $(this).text();
     editBodyText(this, newBodyText);
 });
 
 
+function editBodyText(location, newText) {
+    var objectId = $(location).parent().parent().attr('id');
+    data = JSON.parse(localStorage.getItem('Data Item'));
+    data.forEach(function(object) {
+        if (object.id == objectId) {
+            object.body = newText;
+            return object.body;
+        }
+    });
+    stringData = JSON.stringify(data);
+    localStorage.setItem("Data Item", stringData);
+}
+
+
+/////////Delete Btn////////////////////////////
+
+
 $("#card-section").on('click', '.clear', function() {
-    var idOfRemoved = $(this).parent().parent().attr("id")
-    clear(this, idOfRemoved);
-    $(this).closest('.new-idea').remove();
+  var idOfRemoved = $(this).parent().parent().attr("id")
+  deleteCard(this, idOfRemoved);
+  $(this).closest('.new-idea').remove();
 });
 
+/// Deletes from local storage
+function deleteCard(location, idOfRemoved) {
+    var objectId = $(location).parent().parent().attr("id");
+    var removedId = idOfRemoved;
+    data = JSON.parse(localStorage.getItem("Data Item"));
+    data = data.filter(function(object) {
+        return object.id != objectId;
+    });
+    stringData = JSON.stringify(data);
+    localStorage.setItem("Data Item", stringData);
+}
 
+///////////////Search //////////////////////
 $('#search').on('keyup', function() {
     var searchInput = $('#search').val();
     var re = new RegExp(searchInput, 'igm');
@@ -183,4 +208,8 @@ $('#search').on('keyup', function() {
     })
 });
 
-$("#title-input, #content-input").on("keyup", disableEnter);
+// Clear Input
+function clearInput() {
+    $('#title-input').val('');
+    $('#content-input').val('');
+}

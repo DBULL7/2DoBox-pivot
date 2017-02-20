@@ -2,27 +2,27 @@ var data = [];
 
 //on page load
 $(document).ready(function() {
-    getIdea();
-    printIdea();
+    getToDo();
+    printToDo();
 })
 
 
 //Card Constructor
-function Card(storeIdeaTitle, storeIdeaContent) {
-    this.title = storeIdeaTitle;
-    this.body = storeIdeaContent;
+function Card(toDoTitle, toDoContent) {
+    this.title = toDoTitle;
+    this.body = toDoContent;
     this.quality = "swill";
     this.id = Date.now();
 }
 
 
-function storeIdea() {
+function storeToDo() {
     var stringData = JSON.stringify(data);
     localStorage.setItem("Data Item", stringData);
 }
 
 
-function getIdea() {
+function getToDo() {
     var storedData = localStorage.getItem("Data Item") || '[]';
     var parsedData = JSON.parse(storedData);
     data = parsedData;  //Undeclared var so it's global
@@ -30,17 +30,17 @@ function getIdea() {
 
 
 // Clears card section, then generates cards from local storage
-function printIdea() {
+function printToDo() {
     $("#card-section").html('');
     data.forEach(function(object) {
         $("#card-section").append(`
-			<div id="${object.id}" class="new-idea">
+			<div id="${object.id}" class="card">
 				<header>
-					<h1 class="entry-title" contenteditable='true'>${object.title}</h1>
+					<h1 class="card-title" contenteditable='true'>${object.title}</h1>
 					<button class="clear"></button>
 				</header>
 				<article>
-					<p class='entry-body' contenteditable='true'>${object.body}</p>
+					<p class='card-body' contenteditable='true'>${object.body}</p>
 					<button class="upvote"></button>
 					<button class="downvote"></button>
 					<h3>quality:<h4 class="quality">${object.quality}</h4></h3>
@@ -53,27 +53,27 @@ function printIdea() {
 
 
 ////////////////// Event Listener to Disable/////////////////
-$("#title-input, #content-input").on("keyup", disableEnter);
+$("#title-input, #body-input").on("keyup", disableEnter);
 
 function disableEnter() {
-    if ($("#title-input").val().length > 0 && $("#content-input").val().length > 0) {
-        $("#submit").prop("disabled", false);
+    if ($("#title-input").val().length > 0 && $("#body-input").val().length > 0) {
+        $("#save-button").prop("disabled", false);
     } else {
-        $("#submit").prop("disabled", true);
+        $("#save-button").prop("disabled", true);
     }
 }
 
 
-///////////////Submit //////////////////////////////////////
+///////////////Save //////////////////////////////////////
 
-$("#submit").on('click', function(e) {
+$("#save-button").on('click', function(e) {
     e.preventDefault();
-    var storeIdeaTitle = $('#title-input').val();
-    var storeIdeaContent = $('#content-input').val();
-    var card = new Card(storeIdeaTitle, storeIdeaContent);
+    var storeToDoTitle = $('#title-input').val();
+    var storeToDoContent = $('#body-input').val();
+    var card = new Card(storeToDoTitle, storeToDoContent);
     data.unshift(card);
-    storeIdea();
-    printIdea();
+    storeToDo();
+    printToDo();
     clearInput();
     disableEnter();
 })
@@ -131,7 +131,7 @@ function editQuality(location, qualityVar) {
 ///////////////Content Editable //////////////////////////////////////////////
 
 //Edit Card Title
-$('#card-section').on('blur', '.entry-title', function(e) {
+$('#card-section').on('blur', '.card-title', function(e) {
     var newTitleText = $(this).text();
     editTitleText(this, newTitleText);
 });
@@ -151,7 +151,7 @@ function editTitleText(location, newText) {
 }
 
 //Edit Card Body
-$('#card-section').on('blur', '.entry-body', function() {
+$('#card-section').on('blur', '.card-body', function() {
     var newBodyText = $(this).text();
     editBodyText(this, newBodyText);
 });
@@ -177,7 +177,7 @@ function editBodyText(location, newText) {
 $("#card-section").on('click', '.clear', function() {
   var idOfRemoved = $(this).parent().parent().attr("id")
   deleteCard(this, idOfRemoved);
-  $(this).closest('.new-idea').remove();
+  $(this).closest('.card').remove();
 });
 
 /// Deletes from local storage
@@ -196,8 +196,8 @@ function deleteCard(location, idOfRemoved) {
 $('#search').on('keyup', function() {
     var searchInput = $('#search').val();
     var re = new RegExp(searchInput, 'igm');
-    $('.new-idea').each(function() {
-        var title = $(this).find(".entry-title").text();
+    $('.card').each(function() {
+        var title = $(this).find(".card-title").text();
         var body = $(this).find("article p").text();
         var match = (title.match(re) || body.match(re));
         if (!match) {
@@ -211,5 +211,5 @@ $('#search').on('keyup', function() {
 // Clear Input
 function clearInput() {
     $('#title-input').val('');
-    $('#content-input').val('');
+    $('#body-input').val('');
 }

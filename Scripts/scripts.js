@@ -34,22 +34,28 @@ function printToDo() {
     $("#card-section").html('');
     data.forEach(function(object) {
         $("#card-section").append(`
-			<div id="${object.id}" class="card">
+			<article id="${object.id}" class="card">
 				<header>
 					<h1 class="card-title" contenteditable='true'>${object.title}</h1>
 					<button class="clear"></button>
 				</header>
-				<article>
+				<article class="card-bottom">
 					<p class='card-body' contenteditable='true'>${object.body}</p>
 					<button class="upvote"></button>
 					<button class="downvote"></button>
 					<h3>quality:<h4 class="quality">${object.quality}</h4></h3>
+          <button class="completed-task">Completed</button>
 				</article>
-				<hr>
-			</div>`);
+			</article>`);
     });
 }
 
+// Completed button 
+$('#card-section').on('click', '.completed-task', function() {
+  console.log('does this click')
+  $(this).toggleClass('grayedOut')
+  $(this).parent().parent().toggleClass('grayedOut')
+});
 
 
 ////////////////// Event Listener to Disable/////////////////

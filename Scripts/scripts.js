@@ -82,37 +82,41 @@ $("#save-button").on('click', function(e) {
 
 
 //Upvote
-$("#card-section").on('click', '.upvote', function() {
-    var qualityVar = $(this).siblings(".quality").text();
-    if ($(this).siblings(".quality").text() === "swill") {
-        $(this).siblings(".quality").text("plausible");
-        qualityVar = "plausible";
-        editQuality(this, qualityVar);
-    } else if ($(this).siblings(".quality").text() === "plausible") {
-        $(this).siblings(".quality").text("genius");
-        qualityVar = "genius"
-        editQuality(this, qualityVar);
-    } else if ($(this).siblings(".quality").text() === "genius") {
-        qualityVar = "genius";
-    }
-});
+$("#card-section").on('click', '.upvote', upvote)
 
+
+function upvote() {
+  var qualityVar = $(this).siblings(".quality").text();
+  if ($(this).siblings(".quality").text() === "swill") {
+      $(this).siblings(".quality").text("plausible");
+      qualityVar = "plausible";
+      editQuality(this, qualityVar);
+  } else if ($(this).siblings(".quality").text() === "plausible") {
+      $(this).siblings(".quality").text("genius");
+      qualityVar = "genius"
+      editQuality(this, qualityVar);
+  } else if ($(this).siblings(".quality").text() === "genius") {
+      qualityVar = "genius";
+  }
+}
 
 //Downvote
-$("#card-section").on('click', '.downvote', function() {
-    var qualityVar = $(this).siblings(".quality").text();
-    if ($(this).siblings(".quality").text() === "genius") {
-        $(this).siblings(".quality").text("plausible");
-        qualityVar = "plausible";
-        editQuality(this, qualityVar);
-    } else if ($(this).siblings(".quality").text() === "plausible") {
-        $(this).siblings(".quality").text("swill");
-        qualityVar = "swill";
-        editQuality(this, qualityVar);
-    } else if ($(this).siblings(".quality").text() === "plausible") {
-        qualityVar = "swill";
-    }
-});
+$("#card-section").on('click', '.downvote', downvote)
+
+function downvote() {
+  var qualityVar = $(this).siblings(".quality").text();
+  if ($(this).siblings(".quality").text() === "genius") {
+      $(this).siblings(".quality").text("plausible");
+      qualityVar = "plausible";
+      editQuality(this, qualityVar);
+  } else if ($(this).siblings(".quality").text() === "plausible") {
+      $(this).siblings(".quality").text("swill");
+      qualityVar = "swill";
+      editQuality(this, qualityVar);
+  } else if ($(this).siblings(".quality").text() === "plausible") {
+      qualityVar = "swill";
+  }
+}
 
 //Stores the new vote quality to local storage
 function editQuality(location, qualityVar) {
@@ -174,11 +178,15 @@ function editBodyText(location, newText) {
 /////////Delete Btn////////////////////////////
 
 
-$("#card-section").on('click', '.clear', function() {
+$("#card-section").on('click', '.clear', deleteCardFromStorage)
+
+
+function deleteCardFromStorage() {
   var idOfRemoved = $(this).parent().parent().attr("id")
   deleteCard(this, idOfRemoved);
   $(this).closest('.card').remove();
-});
+}
+
 
 /// Deletes from local storage
 function deleteCard(location, idOfRemoved) {
@@ -193,20 +201,25 @@ function deleteCard(location, idOfRemoved) {
 }
 
 ///////////////Search //////////////////////
-$('#search').on('keyup', function() {
-    var searchInput = $('#search').val();
-    var re = new RegExp(searchInput, 'igm');
-    $('.card').each(function() {
-        var title = $(this).find(".card-title").text();
-        var body = $(this).find("article p").text();
-        var match = (title.match(re) || body.match(re));
-        if (!match) {
-            $(this).hide();
-        } else {
-            $(this).show();
-        }
-    })
-});
+
+//Search Event Listener
+$('#search').on('keyup', search)
+
+
+function search() {
+  var searchInput = $('#search').val();
+  var re = new RegExp(searchInput, 'igm');
+  $('.card').each(function() {
+      var title = $(this).find(".card-title").text();
+      var body = $(this).find("article p").text();
+      var match = (title.match(re) || body.match(re));
+      if (!match) {
+          $(this).hide();
+      } else {
+          $(this).show();
+      }
+  })
+}
 
 // Clear Input
 function clearInput() {

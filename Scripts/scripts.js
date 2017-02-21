@@ -43,18 +43,22 @@ function printToDo() {
 					<p class='card-body' contenteditable='true'>${object.body}</p>
 					<button class="upvote"></button>
 					<button class="downvote"></button>
-					<h3>quality:<h4 class="quality">${object.quality}</h4></h3>
+					<h3 class="quality-text">quality:<h4 class="quality">${object.quality}</h4></h3>
           <button class="completed-task">Completed</button>
 				</article>
 			</article>`);
     });
 }
 
-// Completed button 
+// Completed button
 $('#card-section').on('click', '.completed-task', function() {
   console.log('does this click')
   $(this).toggleClass('grayedOut')
-  $(this).parent().parent().toggleClass('grayedOut')
+  $(this).closest('.card').find('.card-title').toggleClass('grayedOut')
+  $(this).closest('.card').toggleClass('grayCard')
+  $(this).closest('.card').find('.card-body').toggleClass('grayedOut')
+  $(this).closest('.card').find('.quality').toggleClass('grayedOut')
+  $(this).closest('.card').find('.quality-text').toggleClass('grayedOut')
 });
 
 
@@ -232,3 +236,7 @@ function clearInput() {
     $('#title-input').val('');
     $('#body-input').val('');
 }
+
+
+
+//add key value of completed true/false to card objects.  then have completed button pull card out of local storage, toggle value, then put it back in.  have page load only show completed=false.  have show more completed wipe card section and show all cards regardless of completed = true/false.  actually, completed true will need to display first.

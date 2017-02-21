@@ -74,6 +74,12 @@ hr {
   width: 80%;
 }
 
+.quality {
+  color: #6d6e71;
+  font-family: "Roboto Slab", serif;
+  /*font-weight: 300;*/
+}
+
 .card-title, .card-body {
   margin-left: 15px;
   max-width: 15ch;
@@ -102,6 +108,7 @@ input[type="text"], textarea {
   font-size: 18px;
   margin-bottom: 8px;
   padding-left: 3px;
+  resize: none;
   width: 80%;
 }
 
@@ -121,6 +128,7 @@ button {
   border-width: 0px;
   color: #ffffff;
   outline: none;
+  cursor: pointer;
 }
 
 #idea-styler {
@@ -136,7 +144,7 @@ button {
   margin-left: auto;
   margin-right: auto;
   margin-top: 15px;
-  width: 82%;
+  width: 81.5%;
 }
 
 #save-button:hover {
@@ -145,6 +153,7 @@ button {
 
 #save-button:disabled {
   background-color: #6D6E71;
+  cursor: default;
 }
 
 #search {
@@ -193,12 +202,16 @@ button {
 }
 
 .grayedOut {
-  background-color: gray;
-  color: black;
+  color: #a0a0a0;
+  text-decoration: line-through;
+}
+
+.grayCard {
+  background-color: #d1cccc;
 }
 
 .completed-task:hover:enabled {
-  border: 3px solid magenta;
+  border: 1px solid black;
 }
 
 

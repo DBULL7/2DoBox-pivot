@@ -3,16 +3,16 @@ var webdriver = require('selenium-webdriver'),
     until = webdriver.until;
 
 
-// var driver_fx = new webdriver.Builder()
-//     .forBrowser('firefox')
-//     .build();
+var driver_fx = new webdriver.Builder()
+    .forBrowser('firefox')
+    .build();
 
 var driver_chr = new webdriver.Builder()
     .forBrowser('chrome')
     .build();
 
 
-// editTest(driver_fx);
+editTest(driver_fx);
 editTest(driver_chr);
 
 function editTest(driver) {
@@ -22,8 +22,8 @@ function editTest(driver) {
   driver.findElement(By.id('save-button')).click();
 
   driver.sleep(1000).then(function() {
-  driver.findElement(By.id('card-title')).sendKeys('11111');
-  driver.findElement(By.id('card-title')).sendKeys(Keys.ENTER);
+  driver.findElement(By.className('card-title')).sendKeys('11111');
+  driver.findElement(By.className('upvote')).click();
 
   })
 
@@ -31,7 +31,7 @@ function editTest(driver) {
 
   driver.sleep(3000).then(function() {
     driver.findElement(By.className('card-title')).getText().then(function(title) {
-      if(title == '11111') {
+      if(title == '11111please') {
         console.log('Test passed');
       } else {
         console.log('Test failed');
@@ -39,5 +39,5 @@ function editTest(driver) {
     });
   });
 
-  // driver.quit();
+  driver.quit();
 }

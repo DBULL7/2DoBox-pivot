@@ -13,6 +13,7 @@ function Card(toDoTitle, toDoContent) {
     this.body = toDoContent;
     this.quality = "swill";
     this.id = Date.now();
+    this.completed = false;
 }
 
 
@@ -33,6 +34,8 @@ function getToDo() {
 function printToDo() {
     $("#card-section").html('');
     data.forEach(function(object) {
+      if (object.completed == false){
+        console.log(object.completed)
         $("#card-section").append(`
 			<article id="${object.id}" class="card">
 				<header>
@@ -47,19 +50,39 @@ function printToDo() {
           <button class="completed-task">Completed</button>
 				</article>
 			</article>`);
+    }
     });
 }
 
+// show clear button - make higher section to store compelted to dos similar  to card-section, then call print to do with identical function that prepends object.completed = true to the new section 
+
 // Completed button
 $('#card-section').on('click', '.completed-task', function() {
-  console.log('does this click')
+  // console.log('does this click')
+  // var completed = (this).completed;
   $(this).toggleClass('grayedOut')
   $(this).closest('.card').find('.card-title').toggleClass('grayedOut')
   $(this).closest('.card').toggleClass('grayCard')
   $(this).closest('.card').find('.card-body').toggleClass('grayedOut')
   $(this).closest('.card').find('.quality').toggleClass('grayedOut')
   $(this).closest('.card').find('.quality-text').toggleClass('grayedOut')
+  editCompletedStatus(this);
 });
+
+function editCompletedStatus(location) {
+  var objectId = $(location).parent().parent().attr('id');
+  data = JSON.parse(localStorage.getItem('Data Item'));
+  data.forEach(function(object){
+    if (object.id == objectId){
+      object.completed = !object.completed
+      // object.completed = newCompletedStatus
+      console.log("completed? ", object.completed)
+      return object.completed;
+    }
+  })
+  stringData = JSON.stringify(data);
+  localStorage.setItem("Data Item", stringData);
+}
 
 
 ////////////////// Event Listener to Disable/////////////////
@@ -169,8 +192,6 @@ $('#card-section').on('blur', '.card-body', function() {
     var newBodyText = $(this).text();
     editBodyText(this, newBodyText);
 });
-
-
 function editBodyText(location, newText) {
     var objectId = $(location).parent().parent().attr('id');
     data = JSON.parse(localStorage.getItem('Data Item'));

@@ -46,6 +46,7 @@ article {
 
 .card {
   text-align: left;
+  border-bottom: 1px solid #6D6E71;
 }
 
 
@@ -63,7 +64,7 @@ h3, h4 {
 }
 
 h3 {
-  margin-left: 25px;
+  /*margin-left: 25px;*/
 }
 
 h4 {
@@ -81,7 +82,7 @@ hr {
 }
 
 .card-title, .card-body {
-  margin-left: 15px;
+  /*margin-left: 15px;*/
   max-width: 15ch;
   text-align: left;
 }
@@ -185,7 +186,7 @@ button {
 
 .upvote {
   background-image: url("images/upvote.svg");
-  margin-left: 15px;
+  /*margin-left: 15px;*/
 }
 
 .upvote:hover {
@@ -210,8 +211,14 @@ button {
   background-color: #d1cccc;
 }
 
+.completed-task {
+  margin-left: 100px;
+  border-radius: 0px;
+}
+
 .completed-task:hover:enabled {
-  border: 1px solid black;
+  background-color: #00a79d;
+  /*border: 1px solid black;*/
 }
 
 

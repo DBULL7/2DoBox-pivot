@@ -52,11 +52,28 @@ function printToDo() {
           <button class="completed-task">Completed</button>
 				</article>
 			</article>`);
+    } else {
+      $("#completed-section").append(`
+  <article id="${object.id}" class="card">
+    <header>
+      <h1 class="card-title" contenteditable='true'>${object.title}</h1>
+      <button class="clear"></button>
+    </header>
+    <article class="card-bottom">
+      <p class='card-body' contenteditable='true'>${object.body}</p>
+      <button class="upvote"></button>
+      <button class="downvote"></button>
+      <h3>quality:<h4 class="quality">${object.priority}</h4></h3>
+
+      <button class="completed-task">Completed</button>
+    </article>
+  </article>`);
     }
-    });
+
+  });
 }
 
-// show clear button - make higher section to store compelted to dos similar  to card-section, then call print to do with identical function that prepends object.completed = true to the new section , also include a completed css class in markup with other prepend to give the completed todos the css 
+// show completed button - make higher section to store compeleted todos similar  to card-section, then call print to do with identical function that prepends object.completed = true to the new section , also include a completed css class in markup with other prepend to give the completed todos the css
 
 // Completed button
 $('#card-section').on('click', '.completed-task', function() {

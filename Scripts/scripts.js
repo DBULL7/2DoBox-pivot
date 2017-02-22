@@ -37,21 +37,8 @@ function printToDo() {
     data.forEach(function(object) {
       if (object.completed == false){
         console.log(object.completed)
-        $("#card-section").append(`
-			<article id="${object.id}" class="card">
-				<header>
-					<h1 class="card-title" contenteditable='true'>${object.title}</h1>
-					<button class="clear"></button>
-				</header>
-				<article class="card-bottom">
-					<p class='card-body' contenteditable='true'>${object.body}</p>
-					<button class="upvote"></button>
-					<button class="downvote"></button>
-					<h3>quality:<h4 class="quality">${object.priority}</h4></h3>
+        htmlNormalCard(object)
 
-          <button class="completed-task">Completed</button>
-				</article>
-			</article>`);
     } else {
       $("#completed-section").append(`
   <article id="${object.id}" class="card">
@@ -71,6 +58,24 @@ function printToDo() {
     }
 
   });
+}
+
+function htmlNormalCard(object) {
+  $("#card-section").append(`
+<article id="${object.id}" class="card">
+  <header>
+    <h1 class="card-title" contenteditable='true'>${object.title}</h1>
+    <button class="clear"></button>
+  </header>
+  <article class="card-bottom">
+    <p class='card-body' contenteditable='true'>${object.body}</p>
+    <button class="upvote"></button>
+    <button class="downvote"></button>
+    <h3>quality:<h4 class="quality">${object.priority}</h4></h3>
+
+    <button class="completed-task">Completed</button>
+  </article>
+</article>`);
 }
 
 // show completed button - make higher section to store compeleted todos similar  to card-section, then call print to do with identical function that prepends object.completed = true to the new section , also include a completed css class in markup with other prepend to give the completed todos the css
@@ -324,5 +329,18 @@ function clearInput() {
 }
 
 
+
+
+/////////////Filter By Importance/////////////////////
+
+
+// $('#importance-none').on('click', findImportanceNone)
+//
+// function findImportanceNone() {
+//   $("#card-section").html('');
+//   data.forEach(function(object) {
+//     if (object.priority === 'None'){
+//
+// }
 
 //add key value of completed true/false to card objects.  then have completed button pull card out of local storage, toggle value, then put it back in.  have page load only show completed=false.  have show more completed wipe card section and show all cards regardless of completed = true/false.  actually, completed true will need to display first.

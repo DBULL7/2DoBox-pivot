@@ -40,11 +40,11 @@ $('#show-completed').on('click', function(){
       $("#completed-section").append(`
         <article id="${object.id}" class="card grayCard">
         <header>
-        <h1 class="card-title" contenteditable='true'>${object.title}</h1>
+        <h1 class="card-title grayedOut" contenteditable='true'>${object.title}</h1>
         <button class="clear"></button>
         </header>
         <article class="card-bottom">
-        <p class='card-body' contenteditable='true'>${object.body}</p>
+        <p class='card-body grayedOut' contenteditable='true'>${object.body}</p>
         <button class="upvote"></button>
         <button class="downvote"></button>
         <h3>quality:<h4 class="quality">${object.priority}</h4></h3>
@@ -55,6 +55,8 @@ $('#show-completed').on('click', function(){
       }
 
     });
+    printToDo()
+
   })
 
 
@@ -93,11 +95,23 @@ function htmlNormalCard(object) {
 $('#card-section').on('click', '.completed-task', function() {
   // console.log('does this click')
   // var completed = (this).completed;
-  $(this).toggleClass('grayedOut')
+  // $(this).toggleClass('grayedOut')
   $(this).closest('.card').find('.card-title').toggleClass('grayedOut')
   $(this).closest('.card').toggleClass('grayCard')
   $(this).closest('.card').find('.card-body').toggleClass('grayedOut')
-  $(this).closest('.card').find('.quality').toggleClass('grayedOut')
+  // $(this).closest('.card').find('.quality').toggleClass('grayedOut')
+  $(this).closest('.card').find('.quality-text').toggleClass('grayedOut')
+  editCompletedStatus(this);
+});
+
+$('#completed-section').on('click', '.completed-task', function() {
+  // console.log('does this click')
+  // var completed = (this).completed;
+  // $(this).toggleClass('grayedOut')
+  $(this).closest('.card').find('.card-title').toggleClass('grayedOut')
+  $(this).closest('.card').toggleClass('grayCard')
+  $(this).closest('.card').find('.card-body').toggleClass('grayedOut')
+  // $(this).closest('.card').find('.quality').toggleClass('grayedOut')
   $(this).closest('.card').find('.quality-text').toggleClass('grayedOut')
   editCompletedStatus(this);
 });

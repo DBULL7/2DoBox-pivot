@@ -5,6 +5,7 @@ var importance = ['None', 'Low', 'Normal', 'High', 'Critical']
 $(document).ready(function() {
     getToDo();
     printToDo();
+    // $("#card-section").html('')
 })
 
 
@@ -37,7 +38,7 @@ $('#show-completed').on('click', function(){
     if (object.completed == true){
       console.log('getting true value')
 
-      $("#completed-section").append(`
+      $("#card-section").append(`
         <article id="${object.id}" class="card grayCard">
         <header>
         <h1 class="card-title grayedOut" contenteditable='true'>${object.title}</h1>
@@ -62,7 +63,7 @@ $('#show-completed').on('click', function(){
 
 // Clears card section, then generates cards from local storage
 function printToDo() {
-    $("#card-section").html('');
+    // $("#card-section").html('');
     data.forEach(function(object) {
       if (object.completed == false){
         console.log(object.completed)
@@ -72,6 +73,7 @@ function printToDo() {
   })
 }
 function htmlNormalCard(object) {
+
   $("#card-section").append(`
 <article id="${object.id}" class="card">
   <header>
@@ -148,6 +150,7 @@ function disableEnter() {
 
 $("#save-button").on('click', function(e) {
     e.preventDefault();
+    $("#card-section").html('')
     var storeToDoTitle = $('#title-input').val();
     var storeToDoContent = $('#body-input').val();
     var card = new Card(storeToDoTitle, storeToDoContent);

@@ -30,6 +30,33 @@ function getToDo() {
     data = parsedData;  //Undeclared var so it's global
 }
 
+$('#show-completed').on('click', function(){
+  console.log('click it!!!!')
+  $("#card-section").html('');
+  data.forEach(function(object) {
+    if (object.completed == true){
+      console.log('getting true value')
+
+      $("#completed-section").append(`
+        <article id="${object.id}" class="card grayCard">
+        <header>
+        <h1 class="card-title" contenteditable='true'>${object.title}</h1>
+        <button class="clear"></button>
+        </header>
+        <article class="card-bottom">
+        <p class='card-body' contenteditable='true'>${object.body}</p>
+        <button class="upvote"></button>
+        <button class="downvote"></button>
+        <h3>quality:<h4 class="quality">${object.priority}</h4></h3>
+
+        <button class="completed-task">Completed</button>
+        </article>
+        </article>`);
+      }
+
+    });
+  })
+
 
 // Clears card section, then generates cards from local storage
 function printToDo() {
@@ -39,27 +66,9 @@ function printToDo() {
         console.log(object.completed)
         htmlNormalCard(object)
 
-    } else {
-      $("#completed-section").append(`
-  <article id="${object.id}" class="card">
-    <header>
-      <h1 class="card-title" contenteditable='true'>${object.title}</h1>
-      <button class="clear"></button>
-    </header>
-    <article class="card-bottom">
-      <p class='card-body' contenteditable='true'>${object.body}</p>
-      <button class="upvote"></button>
-      <button class="downvote"></button>
-      <h3>quality:<h4 class="quality">${object.priority}</h4></h3>
-
-      <button class="completed-task">Completed</button>
-    </article>
-  </article>`);
     }
-
-  });
+  })
 }
-
 function htmlNormalCard(object) {
   $("#card-section").append(`
 <article id="${object.id}" class="card">

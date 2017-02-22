@@ -341,10 +341,53 @@ function findImportanceNone() {
   data.forEach(function(object) {
     if (object.priority === 'None') {
       htmlNormalCard(object)
-    } else {
-      console.log('Not a None importance')
     }
   })
 }
+
+$('#importance-low').on('click', findImportanceLow)
+
+function findImportanceLow() {
+  $("#card-section").html('');
+  data.forEach(function(object) {
+    if (object.priority === 'Low') {
+      htmlNormalCard(object)
+    }
+  })
+}
+
+$('#importance-normal').on('click', findImportanceNormal)
+
+function findImportanceNormal() {
+  $("#card-section").html('');
+  data.forEach(function(object) {
+    if (object.priority === 'Normal') {
+      htmlNormalCard(object)
+    }
+  })
+}
+
+$('#importance-high').on('click', findImportanceHigh)
+
+function findImportanceHigh() {
+  $("#card-section").html('');
+  data.forEach(function(object) {
+    if (object.priority === 'High') {
+      htmlNormalCard(object)
+    }
+  })
+}
+
+$('#importance-critical').on('click', findImportanceCritcal)
+
+function findImportanceCritcal() {
+  $("#card-section").html('');
+  data.forEach(function(object) {
+    if (object.priority === 'Critical') {
+      htmlNormalCard(object)
+    }
+  })
+}
+
 
 //add key value of completed true/false to card objects.  then have completed button pull card out of local storage, toggle value, then put it back in.  have page load only show completed=false.  have show more completed wipe card section and show all cards regardless of completed = true/false.  actually, completed true will need to display first.

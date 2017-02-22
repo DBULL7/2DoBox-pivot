@@ -54,7 +54,7 @@ function printToDo() {
     });
 }
 
-// show clear button - make higher section to store compelted to dos similar  to card-section, then call print to do with identical function that prepends object.completed = true to the new section 
+// show clear button - make higher section to store compelted to dos similar  to card-section, then call print to do with identical function that prepends object.completed = true to the new section , also include a completed css class in markup with other prepend to give the completed todos the css 
 
 // Completed button
 $('#card-section').on('click', '.completed-task', function() {

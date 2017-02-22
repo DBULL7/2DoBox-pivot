@@ -1,4 +1,5 @@
 var data = [];
+var importance = ['None', 'Low', 'Normal', 'High', 'Critical']
 
 //on page load
 $(document).ready(function() {
@@ -11,7 +12,7 @@ $(document).ready(function() {
 function Card(toDoTitle, toDoContent) {
     this.title = toDoTitle;
     this.body = toDoContent;
-    this.quality = "swill";
+    this.priority = importance[2];
     this.id = Date.now();
 }
 
@@ -43,7 +44,8 @@ function printToDo() {
 					<p class='card-body' contenteditable='true'>${object.body}</p>
 					<button class="upvote"></button>
 					<button class="downvote"></button>
-					<h3 class="quality-text">quality:<h4 class="quality">${object.quality}</h4></h3>
+					<h3>quality:<h4 class="quality">${object.priority}</h4></h3>
+
           <button class="completed-task">Completed</button>
 				</article>
 			</article>`);
@@ -97,39 +99,69 @@ $("#card-section").on('click', '.upvote', upvote)
 
 function upvote() {
   var qualityVar = $(this).siblings(".quality").text();
-  if ($(this).siblings(".quality").text() === "swill") {
-      $(this).siblings(".quality").text("plausible");
-      qualityVar = "plausible";
-      editQuality(this, qualityVar);
-  } else if ($(this).siblings(".quality").text() === "plausible") {
-      $(this).siblings(".quality").text("genius");
-      qualityVar = "genius"
-      editQuality(this, qualityVar);
-  } else if ($(this).siblings(".quality").text() === "genius") {
-      qualityVar = "genius";
-  }
+  console.log(qualityVar)
+    switch (qualityVar) {
+      case importance[0]:
+        $(this).closest('.card').find('.quality').text("Low")
+        break;
+      case importance[1]:
+          $(this).closest('.card').find('.quality').text("Normal")
+        break;
+      case importance[2]:
+        $(this).closest('.card').find('.quality').text("High")
+        break;
+      default:
+      $(this).closest('.card').find('.quality').text("Critical")
+    }
 }
+  // if ($(this).siblings(".quality").text() === "swill") {
+  //     $(this).siblings(".quality").text("plausible");
+  //     qualityVar = "plausible";
+  //     editQuality(this, qualityVar);
+  // } else if ($(this).siblings(".quality").text() === "plausible") {
+  //     $(this).siblings(".quality").text("genius");
+  //     qualityVar = "genius"
+  //     editQuality(this, qualityVar);
+  // } else if ($(this).siblings(".quality").text() === "genius") {
+  //     qualityVar = "genius";
+  // }
 
 //Downvote
 $("#card-section").on('click', '.downvote', downvote)
 
 function downvote() {
   var qualityVar = $(this).siblings(".quality").text();
-  if ($(this).siblings(".quality").text() === "genius") {
-      $(this).siblings(".quality").text("plausible");
-      qualityVar = "plausible";
-      editQuality(this, qualityVar);
-  } else if ($(this).siblings(".quality").text() === "plausible") {
-      $(this).siblings(".quality").text("swill");
-      qualityVar = "swill";
-      editQuality(this, qualityVar);
-  } else if ($(this).siblings(".quality").text() === "plausible") {
-      qualityVar = "swill";
-  }
+  console.log(qualityVar)
+    switch (qualityVar) {
+      case importance[4]:
+        $(this).closest('.card').find('.quality').text("High")
+        break;
+      case importance[3]:
+        $(this).closest('.card').find('.quality').text("Normal")
+        break;
+      case importance[2]:
+          $(this).closest('.card').find('.quality').text("Low")
+        break;
+      default:
+      $(this).closest('.card').find('.quality').text("None")
+    }
 }
 
+  // if ($(this).siblings(".quality").text() === "genius") {
+  //     $(this).siblings(".quality").text("plausible");
+  //     qualityVar = "plausible";
+  //     editQuality(this, qualityVar);
+  // } else if ($(this).siblings(".quality").text() === "plausible") {
+  //     $(this).siblings(".quality").text("swill");
+  //     qualityVar = "swill";
+  //     editQuality(this, qualityVar);
+  // } else if ($(this).siblings(".quality").text() === "plausible") {
+  //     qualityVar = "swill";
+  // }
+
+
 //Stores the new vote quality to local storage
-function editQuality(location, qualityVar) {
+function changeImportance(location, qualityVar) {
     var objectId = $(location).parent().parent().attr("id");
     data = JSON.parse(localStorage.getItem("Data Item"));
     data.forEach(function(object) {

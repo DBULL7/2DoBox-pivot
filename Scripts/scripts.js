@@ -143,15 +143,23 @@ function upvote() {
     switch (qualityVar) {
       case importance[0]:
         $(this).closest('.card').find('.quality').text("Low")
+        qualityVar = "Low"
+        changeImportance(this, qualityVar)
         break;
       case importance[1]:
           $(this).closest('.card').find('.quality').text("Normal")
+          qualityVar = "Normal"
+          changeImportance(this, qualityVar)
         break;
       case importance[2]:
         $(this).closest('.card').find('.quality').text("High")
+        qualityVar = "High"
+        changeImportance(this, qualityVar);
         break;
       default:
       $(this).closest('.card').find('.quality').text("Critical")
+      qualityVar = "Critical"
+      changeImportance(this, qualityVar);
     }
 }
   // if ($(this).siblings(".quality").text() === "swill") {
@@ -175,15 +183,23 @@ function downvote() {
     switch (qualityVar) {
       case importance[4]:
         $(this).closest('.card').find('.quality').text("High")
+        qualityVar = "High"
+        changeImportance(this, qualityVar);
         break;
       case importance[3]:
         $(this).closest('.card').find('.quality').text("Normal")
+        qualityVar = "Normal"
+        changeImportance(this, qualityVar);
         break;
       case importance[2]:
           $(this).closest('.card').find('.quality').text("Low")
+          qualityVar = "Low"
+          changeImportance(this, qualityVar);
         break;
       default:
       $(this).closest('.card').find('.quality').text("None")
+      qualityVar = "None"
+      changeImportance(this, qualityVar);
     }
 }
 
@@ -206,8 +222,8 @@ function changeImportance(location, qualityVar) {
     data = JSON.parse(localStorage.getItem("Data Item"));
     data.forEach(function(object) {
         if (object.id == objectId) {
-            object.quality = qualityVar;
-            return object.quality;
+            object.priority = qualityVar;
+            return object.priority;
         }
     });
     stringData = JSON.stringify(data);

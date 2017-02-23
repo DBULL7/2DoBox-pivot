@@ -5,9 +5,25 @@ var importance = ['None', 'Low', 'Normal', 'High', 'Critical']
 $(document).ready(function() {
     getToDo();
     printToDo();
+    hideOverTen();
     // $("#card-section").html('')
 })
 
+function hideOverTen() {
+  var cards = $('.card')
+
+  cards.each(function(i, card) {
+    if(i >= 9) {
+      $(card).hide()
+    } else {
+      $(card).show()
+    }
+  })
+  // var cards = $('.card').val()
+  // cards.each(function(i, val) {
+  //   $(card).nextAll('.card').addClass('hidden')
+  // })
+}
 
 //Card Constructor
 function Card(toDoTitle, toDoContent) {
@@ -66,7 +82,6 @@ function printToDo() {
     // $("#card-section").html('');
     data.forEach(function(object) {
       if (object.completed == false){
-        console.log(object.completed)
         htmlNormalCard(object)
 
     }

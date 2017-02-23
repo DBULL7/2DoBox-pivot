@@ -17,7 +17,7 @@ $('#show-more').on('click', function(){
 function hideOverTen() {
   var cards = $('.card')
   cards.each(function(i, card) {
-    if(i >= 9) {
+    if(i >= 10) {
       $(card).hide()
     } else {
       $(card).show()
@@ -148,7 +148,7 @@ function disableEnter() {
 
 
 
-$('#title-input, #body-input').on("keydown", function() {
+$('#title-input, #body-input').on("keyup keydown", function() {
   var countTitle = $('#title-input').val().length
   var countBody = $('#body-input').val().length
   counterTitle(countTitle)

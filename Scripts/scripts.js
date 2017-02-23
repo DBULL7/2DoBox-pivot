@@ -10,6 +10,7 @@ $(document).ready(function() {
 })
 
 $('#show-more').on('click', function(){
+  clearCardSection()
   printToDo()
 })
 
@@ -129,22 +130,13 @@ $('#card-section').on('click', '.completed-task', function() {
   editCompletedStatus(this);
 });
 
-$('#completed-section').on('click', '.completed-task', function() {
-  $(this).closest('.card').find('.card-title').toggleClass('grayedOut')
-  $(this).closest('.card').toggleClass('grayCard')
-  $(this).closest('.card').find('.card-body').toggleClass('grayedOut')
-
-  $(this).closest('.card').find('.quality-text').toggleClass('grayedOut')
-  editCompletedStatus(this);
-});
 
 function editCompletedStatus(location) {
-  var objectId = $(location).parent().parent().attr('id');
+  var objectId = $(location).parent().parent().parent().attr('id');
   data = JSON.parse(localStorage.getItem('Data Item'));
   data.forEach(function(object){
     if (object.id == objectId){
       object.completed = !object.completed
-      // object.completed = newCompletedStatus
       console.log("completed? ", object.completed)
       return object.completed;
     }
@@ -292,11 +284,12 @@ function downvote() {
 
 //Stores the new vote quality to local storage
 function changeImportance(location, qualityVar) {
-    var objectId = $(location).parent().parent().attr("id");
+    var objectId = $(location).closest('.card').attr("id");
     data = JSON.parse(localStorage.getItem("Data Item"));
     data.forEach(function(object) {
         if (object.id == objectId) {
             object.priority = qualityVar;
+            console.log(object.priority)
             return object.priority;
         }
     });
@@ -428,10 +421,15 @@ function clearInput() {
 /////////////Filter By Importance/////////////////////
 
 
+function clearCardSection() {
+  $("#card-section").html('');
+}
+
+
 $('#importance-none').on('click', findImportanceNone)
 
 function findImportanceNone() {
-  $("#card-section").html('');
+  clearCardSection()
   data.forEach(function(object) {
     if (object.priority === 'None') {
       htmlNormalCard(object)
@@ -442,7 +440,7 @@ function findImportanceNone() {
 $('#importance-low').on('click', findImportanceLow)
 
 function findImportanceLow() {
-  $("#card-section").html('');
+  clearCardSection()
   data.forEach(function(object) {
     if (object.priority === 'Low') {
       htmlNormalCard(object)
@@ -453,7 +451,7 @@ function findImportanceLow() {
 $('#importance-normal').on('click', findImportanceNormal)
 
 function findImportanceNormal() {
-  $("#card-section").html('');
+  clearCardSection()
   data.forEach(function(object) {
     if (object.priority === 'Normal') {
       htmlNormalCard(object)
@@ -464,7 +462,7 @@ function findImportanceNormal() {
 $('#importance-high').on('click', findImportanceHigh)
 
 function findImportanceHigh() {
-  $("#card-section").html('');
+  clearCardSection()
   data.forEach(function(object) {
     if (object.priority === 'High') {
       htmlNormalCard(object)
@@ -475,7 +473,7 @@ function findImportanceHigh() {
 $('#importance-critical').on('click', findImportanceCritcal)
 
 function findImportanceCritcal() {
-  $("#card-section").html('');
+  clearCardSection()
   data.forEach(function(object) {
     if (object.priority === 'Critical') {
       htmlNormalCard(object)
@@ -487,7 +485,7 @@ function findImportanceCritcal() {
 $('#importance-all').on('click', findImportanceAll)
 
 function findImportanceAll() {
-  $("#card-section").html('');
+  clearCardSection()
   data.forEach(function(object) {
     if (object.completed === false) {
       htmlNormalCard(object)

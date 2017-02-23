@@ -294,9 +294,34 @@ function changeImportance(location, qualityVar) {
 
 ///////////////Content Editable //////////////////////////////////////////////
 
+//Focus
+$('#card-section').on('focus', '.card-title', function() {
+  $(this).on('keyup', function(event) {
+    if (event.keyCode === 13) {
+      event.preventDefault();
+      $(this).blur()
+      return false
+    }
+  })
+})
+
+
+$('#card-section').on('focus', '.card-body', function() {
+  $(this).on('keyup', function(event) {
+    if (event.keyCode === 13) {
+      event.preventDefault();
+      $(this).blur()
+      return false
+    }
+  })
+})
+
+
 //Edit Card Title
-$('#card-section').on('blur', '.card-title', function(e) {
+$('#card-section').on('blur', '.card-title', function() {
     var newTitleText = $(this).text();
+
+    // var newTitleText = $(this).text();
     editTitleText(this, newTitleText);
 });
 

@@ -16,30 +16,30 @@
           <h1 class="logo"><span id="idea-styler">todo</span>box</h1>
         </header>
         <form>
-          <input type="text" id="title-input" placeholder="Title">
-          <article id="title-counter">0</article>
-          <textarea id="body-input" placeholder="Body"></textarea>
-          <article id="body-counter">0</article>
-          <button id="save-button" disabled="true">save</button>
+          <input type="text" id="title-input" placeholder="Title" aria-label="Input field for ToDo title" aria-required="true">
+          <article class="counters">Characters: <span id="title-counter" role="count number of current characters in title input field">0</span></article>
+          <textarea id="body-input" placeholder="Body" aria-label="Input field for ToDo body" aria-required="true"></textarea>
+            <article class="counters">Characters: <span id="body-counter" role="count number of current characters in body input field">0</span></article>
+          <button id="save-button" disabled="true" aria-label="Button to save ToDo" aria-required="true">save</button>
         </form>
       </main>
-      <aside class="lower-section"> <!-- ok why tf is this an aside???? -->
-        <input type="text" id="search" placeholder="Filter">
+      <section class="lower-section">
+        <input type="text" id="search" placeholder="Filter" aria-label="Input field for search/filter" aria-required="true">
+        <section class="show-buttons">
+          <button type="button" id="show-more" class="card-buttons" aria-label="Button to load additional ToDos" aria-required="true">Show More ToDos</button>
+          <button type="button" id="show-completed" class="card-buttons" aria-label="Button to display completed ToDos" aria-required="true">Show Completed</button>
+        </section>
         <section class="importance-buttons">
-          <button type="button" id="show-more" class="card-buttons">Show More ToDos</button>
-          <button type="button" id="show-completed" class="card-buttons">Show Completed</button>
-          <button type="button" id="importance-none" class="card-buttons">None</button>
-          <button type="button" id="importance-low" class="card-buttons">Low</button>
-          <button type="button" id="importance-normal" class="card-buttons">Normal</button>
-          <button type="button" id="importance-high" class="card-buttons">High</button>
-          <button type="button" id="importance-critical" class="card-buttons">Critical</button>
-          <button type="button" id="importance-all" class="card-buttons">All</button>
+          <button type="button" id="importance-none" class="card-buttons" aria-label="Button to display only ToDos of importance level of none" aria-required="true">None</button>
+          <button type="button" id="importance-low" class="card-buttons" aria-label="Button to display only ToDos of importance level of low" aria-required="true">Low</button>
+          <button type="button" id="importance-normal" class="card-buttons" aria-label="Button to display only ToDos of importance level of normal" aria-required="true">Normal</button>
+          <button type="button" id="importance-high" class="card-buttons" aria-label="Button to display only ToDos of importance level of high" aria-required="true">High</button>
+          <button type="button" id="importance-critical" class="card-buttons" aria-label="Button to display only ToDos of importance level of critical" aria-required="true">Critical</button>
+          <button type="button" id="importance-all" class="card-buttons" aria-label="Button to display all ToDos regardless of importance level" aria-required="true">All</button>
         </section>
-        <!-- <section id="completed-section"></section> -->
         <section id="card-section">
-          <!-- New Cards here! -->
         </section>
-      </aside>
+      </section>
     </section>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script>

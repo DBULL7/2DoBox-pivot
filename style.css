@@ -252,7 +252,7 @@ button {
 .card-buttons {
   background-color: #00a79d;
   border-radius: 0px;
-  padding: 4px;
+  padding: 7px 4px;
 }
 
 #show-completed:hover, #show-more:hover {
@@ -307,7 +307,7 @@ button {
   }
 
   .card-buttons {
-    padding: 6px;
+    padding: 6px 12px;
   }
 
   /*.completed-task {

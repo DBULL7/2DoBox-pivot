@@ -66,12 +66,8 @@ article {
 
 .flex-card-bottom {
   display: flex;
-  align-items: center;
+  /*align-items: center;*/
   justify-content: space-between;
-}
-
-.card-bottom {
-
 }
 
 #idea-styler {
@@ -231,7 +227,9 @@ button {
 .completed-task {
   background-color: #00a79d;
   border-radius: 0px;
-  padding: 4px;
+  padding: 1px 4px;
+  height: 20px;
+  margin-top: 18px;
 }
 
 .completed-task:hover {
@@ -312,9 +310,9 @@ button {
     padding: 6px;
   }
 
-  .completed-task {
+  /*.completed-task {
     padding: 6px;
-  }
+  }*/
 }
 
 @media screen and (min-width: 960px) {

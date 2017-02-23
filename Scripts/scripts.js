@@ -9,6 +9,12 @@ $(document).ready(function() {
     // $("#card-section").html('')
 })
 
+$('#show-more').on('click', function(){
+  printToDo()
+  console.log('???')
+})
+
+
 function hideOverTen() {
   var cards = $('.card')
 

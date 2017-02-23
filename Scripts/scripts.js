@@ -48,7 +48,7 @@ function getToDo() {
 }
 
 $('#show-completed').on('click', function(){
-  $("#card-section").html('');
+  clearCardSection()
   data.forEach(function(object) {
     if (object.completed == true){
 
@@ -158,6 +158,7 @@ $('#title-input, #body-input').on("keyup keydown", function() {
   if ((countTitle < 120) && (countBody < 120)) {
     if ((0 < countTitle) && (0 < countBody)) {
       $("#save-button").prop("disabled", false)
+      revertInputColor()
     } else {
       $("#save-button").prop("disabled", true)
     }
@@ -167,6 +168,11 @@ $('#title-input, #body-input').on("keyup keydown", function() {
   }
 
 })
+
+function revertInputColor() {
+  $('#title-input').css('background-color', 'white')
+  $('#body-input').css('background-color', 'white')
+}
 
 function changeInputColor(countTitle, countBody) {
   if (countTitle > 120) {
@@ -389,6 +395,10 @@ function clearInput() {
     $('#body-input').val('');
 }
 
+
+function clearCardSection() {
+  $("#card-section").html('');
+}
 
 function clearCardSection() {
   $("#card-section").html('');

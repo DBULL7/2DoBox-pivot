@@ -48,7 +48,7 @@ function getToDo() {
 }
 
 $('#show-completed').on('click', function(){
-  $("#card-section").html('');
+  clearCardSection()
   data.forEach(function(object) {
     if (object.completed == true){
 
@@ -154,6 +154,7 @@ $('#title-input, #body-input').on("keydown", function() {
   if ((countTitle < 120) && (countBody < 120)) {
     if ((0 < countTitle) && (0 < countBody)) {
       $("#save-button").prop("disabled", false)
+      revertInputColor()
     } else {
       $("#save-button").prop("disabled", true)
     }
@@ -163,6 +164,11 @@ $('#title-input, #body-input').on("keydown", function() {
   }
 
 })
+
+function revertInputColor() {
+  $('#title-input').css('background-color', 'white')
+  $('#body-input').css('background-color', 'white')
+}
 
 function changeInputColor(countTitle, countBody) {
   if (countTitle > 120) {
@@ -383,11 +389,15 @@ function clearInput() {
 
 /////////////Filter By Importance/////////////////////
 
+function clearCardSection() {
+  $("#card-section").html('');
+}
+
 
 $('#importance-none').on('click', findImportanceNone)
 
 function findImportanceNone() {
-  $("#card-section").html('');
+  clearCardSection()
   data.forEach(function(object) {
     if (object.priority === 'None') {
       htmlNormalCard(object)
@@ -398,7 +408,7 @@ function findImportanceNone() {
 $('#importance-low').on('click', findImportanceLow)
 
 function findImportanceLow() {
-  $("#card-section").html('');
+  clearCardSection()
   data.forEach(function(object) {
     if (object.priority === 'Low') {
       htmlNormalCard(object)
@@ -409,7 +419,7 @@ function findImportanceLow() {
 $('#importance-normal').on('click', findImportanceNormal)
 
 function findImportanceNormal() {
-  $("#card-section").html('');
+  clearCardSection()
   data.forEach(function(object) {
     if (object.priority === 'Normal') {
       htmlNormalCard(object)
@@ -420,7 +430,7 @@ function findImportanceNormal() {
 $('#importance-high').on('click', findImportanceHigh)
 
 function findImportanceHigh() {
-  $("#card-section").html('');
+  clearCardSection()
   data.forEach(function(object) {
     if (object.priority === 'High') {
       htmlNormalCard(object)
@@ -431,7 +441,7 @@ function findImportanceHigh() {
 $('#importance-critical').on('click', findImportanceCritcal)
 
 function findImportanceCritcal() {
-  $("#card-section").html('');
+  clearCardSection()
   data.forEach(function(object) {
     if (object.priority === 'Critical') {
       htmlNormalCard(object)
@@ -443,7 +453,7 @@ function findImportanceCritcal() {
 $('#importance-all').on('click', findImportanceAll)
 
 function findImportanceAll() {
-  $("#card-section").html('');
+  clearCardSection()
   data.forEach(function(object) {
     if (object.completed === false) {
       htmlNormalCard(object)

@@ -1,12 +1,11 @@
 var data = [];
 var importance = ['None', 'Low', 'Normal', 'High', 'Critical']
 
-//on page load
+
 $(document).ready(function() {
     getToDo();
     printToDo();
     hideOverTen();
-    // $("#card-section").html('')
 })
 
 $('#show-more').on('click', function(){
@@ -26,7 +25,7 @@ function hideOverTen() {
   })
 }
 
-//Card Constructor
+
 function Card(toDoTitle, toDoContent) {
     this.title = toDoTitle;
     this.body = toDoContent;
@@ -83,7 +82,6 @@ $('#show-completed').on('click', function(){
   })
 
 
-// Clears card section, then generates cards from local storage
 function printToDo() {
     data.forEach(function(object) {
       if (object.completed == false){
@@ -92,6 +90,7 @@ function printToDo() {
     }
   })
 }
+
 
 function htmlNormalCard(object) {
 
@@ -121,7 +120,6 @@ function htmlNormalCard(object) {
 }
 
 
-// Completed button
 $('#card-section').on('click', '.completed-task', function() {
   $(this).closest('.card').find('.card-title').toggleClass('grayedOut')
   $(this).closest('.card').toggleClass('grayCard')
@@ -137,7 +135,6 @@ function editCompletedStatus(location) {
   data.forEach(function(object){
     if (object.id == objectId){
       object.completed = !object.completed
-      console.log("completed? ", object.completed)
       return object.completed;
     }
   })
@@ -201,7 +198,6 @@ function resetCounters() {
   $('#title-counter').text(0)
 }
 
-///////////////Save //////////////////////////////////////
 
 $("#save-button").on('click', function(e) {
     e.preventDefault();
@@ -217,16 +213,11 @@ $("#save-button").on('click', function(e) {
     disableEnter();
 })
 
-//////////////////Upvote and Downvote////////////////////////
 
-
-//Upvote
 $("#card-section").on('click', '.upvote', upvote)
-
 
 function upvote() {
   var qualityVar = $(this).siblings(".quality").text();
-  console.log(qualityVar)
     switch (qualityVar) {
       case importance[0]:
         $(this).closest('.card').find('.quality').text("Low")
@@ -251,12 +242,10 @@ function upvote() {
 }
 
 
-//Downvote
 $("#card-section").on('click', '.downvote', downvote)
 
 function downvote() {
   var qualityVar = $(this).siblings(".quality").text();
-  console.log(qualityVar)
     switch (qualityVar) {
       case importance[4]:
         $(this).closest('.card').find('.quality').text("High")
@@ -281,15 +270,12 @@ function downvote() {
 }
 
 
-
-//Stores the new vote quality to local storage
 function changeImportance(location, qualityVar) {
     var objectId = $(location).closest('.card').attr("id");
     data = JSON.parse(localStorage.getItem("Data Item"));
     data.forEach(function(object) {
         if (object.id == objectId) {
             object.priority = qualityVar;
-            console.log(object.priority)
             return object.priority;
         }
     });
@@ -297,9 +283,7 @@ function changeImportance(location, qualityVar) {
     localStorage.setItem("Data Item", stringData);
 }
 
-///////////////Content Editable //////////////////////////////////////////////
 
-//Focus
 $('#card-section').on('focus', '.card-title', function() {
   $(this).on('keyup', function(event) {
     if (event.keyCode === 13) {
@@ -322,11 +306,8 @@ $('#card-section').on('focus', '.card-body', function() {
 })
 
 
-//Edit Card Title
 $('#card-section').on('blur', '.card-title', function() {
     var newTitleText = $(this).text();
-
-    // var newTitleText = $(this).text();
     editTitleText(this, newTitleText);
 });
 
@@ -344,7 +325,7 @@ function editTitleText(location, newText) {
     localStorage.setItem("Data Item", stringData);
 }
 
-//Edit Card Body
+
 $('#card-section').on('blur', '.card-body', function() {
     var newBodyText = $(this).text();
     editBodyText(this, newBodyText);
@@ -363,9 +344,6 @@ function editBodyText(location, newText) {
 }
 
 
-/////////Delete Btn////////////////////////////
-
-
 $("#card-section").on('click', '.clear', deleteCardFromStorage)
 
 
@@ -376,7 +354,6 @@ function deleteCardFromStorage() {
 }
 
 
-/// Deletes from local storage
 function deleteCard(location, idOfRemoved) {
     var objectId = $(location).parent().parent().attr("id");
     var removedId = idOfRemoved;
@@ -388,11 +365,8 @@ function deleteCard(location, idOfRemoved) {
     localStorage.setItem("Data Item", stringData);
 }
 
-///////////////Search //////////////////////
 
-//Search Event Listener
 $('#search').on('keyup', search)
-
 
 function search() {
   var searchInput = $('#search').val();
@@ -409,16 +383,11 @@ function search() {
   })
 }
 
-// Clear Input
+
 function clearInput() {
     $('#title-input').val('');
     $('#body-input').val('');
 }
-
-
-
-
-/////////////Filter By Importance/////////////////////
 
 
 function clearCardSection() {

@@ -214,13 +214,86 @@ button {
 .completed-task {
   margin-left: 100px;
   border-radius: 0px;
+  background-color: #00a79d;
 }
 
-.completed-task:hover:enabled {
-  background-color: #00a79d;
+.completed-task:hover {
+  background-color: #045e55;
   /*border: 1px solid black;*/
 }
 
+.card-buttons {
+  border-radius: 0px;
+}
+
+#show-completed, #show-more {
+  background-color: #00a79d;
+}
+
+#show-completed:hover, #show-more:hover {
+  background-color: #045e55;
+}
+
+#importance-none {
+  /*border: 2px solid #00C655;
+  background-color: white;
+  color: #939598;*/
+background-color: #00a79d;
+}
+
+#importance-none:hover {
+  background-color: #00c655;
+}
+
+#importance-low {
+  /*border: 2px solid #FFEC00;*/
+  background-color: #00a79d;
+}
+
+#importance-low:hover {
+  background-color: #ffec00;
+}
+
+#importance-low:active {
+  background-color: #ffec00;
+}
+
+#importance-normal {
+  background-color: #00a79d;
+}
+
+#importance-normal:hover {
+  background-color: #FF8A29;
+}
+
+
+#importance-high {
+  /*color: #E80000;*/
+  background-color: #00a79d;
+
+}
+
+#importance-high:hover {
+  background-color: #e80000;
+}
+
+#importance-critical {
+  /*border: 2px solid #A900CC;
+  color: #A900CC*/
+  background-color: #00a79d;
+}
+
+#importance-critical:hover {
+  background-color: #a900cc;
+}
+
+#importance-all {
+  background-color: #00a79d;
+}
+
+#importance-all:hover {
+  background-color: #045e55;
+}
 
 /*----Media Queries ----*/
 

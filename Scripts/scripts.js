@@ -48,11 +48,9 @@ function getToDo() {
 }
 
 $('#show-completed').on('click', function(){
-  console.log('click it!!!!')
   $("#card-section").html('');
   data.forEach(function(object) {
     if (object.completed == true){
-      console.log('getting true value')
 
       $("#card-section").append(`
         <article id="${object.id}" class="card grayCard">
@@ -79,7 +77,6 @@ $('#show-completed').on('click', function(){
 
 // Clears card section, then generates cards from local storage
 function printToDo() {
-    // $("#card-section").html('');
     data.forEach(function(object) {
       if (object.completed == false){
         htmlNormalCard(object)
@@ -87,6 +84,7 @@ function printToDo() {
     }
   })
 }
+
 function htmlNormalCard(object) {
 
   $("#card-section").append(`
@@ -109,25 +107,18 @@ function htmlNormalCard(object) {
 
 // Completed button
 $('#card-section').on('click', '.completed-task', function() {
-  // console.log('does this click')
-  // var completed = (this).completed;
-  // $(this).toggleClass('grayedOut')
   $(this).closest('.card').find('.card-title').toggleClass('grayedOut')
   $(this).closest('.card').toggleClass('grayCard')
   $(this).closest('.card').find('.card-body').toggleClass('grayedOut')
-  // $(this).closest('.card').find('.quality').toggleClass('grayedOut')
   $(this).closest('.card').find('.quality-text').toggleClass('grayedOut')
   editCompletedStatus(this);
 });
 
 $('#completed-section').on('click', '.completed-task', function() {
-  // console.log('does this click')
-  // var completed = (this).completed;
-  // $(this).toggleClass('grayedOut')
   $(this).closest('.card').find('.card-title').toggleClass('grayedOut')
   $(this).closest('.card').toggleClass('grayCard')
   $(this).closest('.card').find('.card-body').toggleClass('grayedOut')
-  // $(this).closest('.card').find('.quality').toggleClass('grayedOut')
+
   $(this).closest('.card').find('.quality-text').toggleClass('grayedOut')
   editCompletedStatus(this);
 });
@@ -148,40 +139,55 @@ function editCompletedStatus(location) {
 }
 
 
-////////////////// Event Listener to Disable/////////////////
-$("#title-input, #body-input").on("keyup", disableEnter);
-
 function disableEnter() {
-    if ($("#title-input").val().length > 0 && $("#body-input").val().length > 0) {
-        $("#save-button").prop("disabled", false);
-    } else {
-        $("#save-button").prop("disabled", true);
-    }
+  $("#save-button").prop("disabled", true)
 }
 
 
-$('#title-input').on("keyup", counter)
 
-function counter() {
-  var count = $('#title-input').val().length
-  if (count < 500) {
-    $('#title-counter').text(500 - count)
+$('#title-input, #body-input').on("keydown", function() {
+  var countTitle = $('#title-input').val().length
+  var countBody = $('#body-input').val().length
+  counterTitle(countTitle)
+  counterBody(countBody)
+
+  if ((countTitle < 120) && (countBody < 120)) {
+    if ((0 < countTitle) && (0 < countBody)) {
+      $("#save-button").prop("disabled", false)
+    } else {
+      $("#save-button").prop("disabled", true)
+    }
+  } else {
+    $("#save-button").prop("disabled", true)
+    changeInputColor(countTitle, countBody)
+  }
+
+})
+
+function changeInputColor(countTitle, countBody) {
+  if (countTitle > 120) {
+    $('#title-input').css('background-color', 'red')
+  }
+  if (countBody > 120) {
+    $('#body-input').css('background-color', 'red')
   }
 }
 
-$('#body-input').on("keyup", counterBody)
+function counterTitle(count) {
+  if (count <= 120) {
+    $('#title-counter').text(count)
+  }
+}
 
-function counterBody() {
-  var count = $('#body-input').val().length
-  if (count < 500) {
-    $('#body-counter').text(500 - count)
+function counterBody(count) {
+  if (count <= 120) {
+    $('#body-counter').text(count)
   }
 }
 
 function resetCounters() {
-  $('#body-counter').text(500)
-  $('#title-counter').text(500)
-
+  $('#body-counter').text(0)
+  $('#title-counter').text(0)
 }
 
 ///////////////Save //////////////////////////////////////

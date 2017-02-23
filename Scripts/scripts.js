@@ -56,17 +56,17 @@ $('#show-completed').on('click', function(){
         <article id="${object.id}" class="card grayCard">
         <header class="card-header">
           <h1 class="card-title grayedOut" contenteditable='true'>${object.title}</h1>
-          <button class="clear"></button>
+          <button class="clear" aria-label="Button to delete ToDo" aria-required="true"></button>
         </header>
         <article class="card-bottom">
           <p class='card-body grayedOut' contenteditable='true'>${object.body}</p>
-          <button class="upvote"></button>
-          <button class="downvote"></button>
+          <button class="upvote" aria-label="Button to upvote ToDo importance" aria-required="true"></button>
+          <button class="downvote" aria-label="Button to downvote ToDo importance" aria-required="true"></button>
           <h3 class="quality-text">importance:
             <h4 class="quality">${object.priority}
             </h4>
           </h3>
-          <button class="completed-task">Completed
+          <button class="completed-task" aria-label="Button to mark ToDo complete" aria-required="true">Completed
           </button>
         </article>
         </article>`);
@@ -94,15 +94,15 @@ function htmlNormalCard(object) {
 <article id="${object.id}" class="card">
   <header class="card-header">
     <h1 class="card-title" contenteditable='true'>${object.title}</h1>
-    <button class="clear"></button>
+    <button class="clear" aria-label="Button to delete ToDo" aria-required="true"></button>
   </header>
   <article class="card-bottom">
     <p class='card-body' contenteditable='true'>${object.body}</p>
-    <button class="upvote"></button>
-    <button class="downvote"></button>
+    <button class="upvote" aria-label="Button to upvote ToDo importance" aria-required="true"></button>
+    <button class="downvote" aria-label="Button to downvote ToDo importance" aria-required="true"></button>
     <h3 class="quality-text">importance:<h4 class="quality">${object.priority}</h4></h3>
 
-    <button class="completed-task">Completed</button>
+    <button class="completed-task" aria-label="Button to mark ToDo complete" aria-required="true">Completed</button>
   </article>
 </article>`);
 }

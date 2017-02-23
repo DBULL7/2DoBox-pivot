@@ -64,6 +64,12 @@ article {
   justify-content: center;
 }
 
+.flex-card-bottom {
+  display: flex;
+  /*align-items: center;*/
+  justify-content: space-between;
+}
+
 #idea-styler {
   color: #00a79d;
 }
@@ -221,7 +227,9 @@ button {
 .completed-task {
   background-color: #00a79d;
   border-radius: 0px;
-  padding: 4px;
+  padding: 1px 4px;
+  height: 20px;
+  margin-top: 18px;
 }
 
 .completed-task:hover {
@@ -244,7 +252,7 @@ button {
 .card-buttons {
   background-color: #00a79d;
   border-radius: 0px;
-  padding: 4px;
+  padding: 7px 4px;
 }
 
 #show-completed:hover, #show-more:hover {
@@ -299,12 +307,12 @@ button {
   }
 
   .card-buttons {
-    padding: 6px;
+    padding: 6px 12px;
   }
 
-  .completed-task {
+  /*.completed-task {
     padding: 6px;
-  }
+  }*/
 }
 
 @media screen and (min-width: 960px) {

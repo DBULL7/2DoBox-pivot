@@ -60,14 +60,18 @@ $('#show-completed').on('click', function(){
         </header>
         <article class="card-bottom">
           <p class='card-body grayedOut' contenteditable='true'>${object.body}</p>
-          <button class="upvote" aria-label="Button to upvote ToDo importance" aria-required="true"></button>
-          <button class="downvote" aria-label="Button to downvote ToDo importance" aria-required="true"></button>
-          <h3 class="quality-text">importance:
-            <h4 class="quality">${object.priority}
-            </h4>
-          </h3>
-          <button class="completed-task" aria-label="Button to mark ToDo complete" aria-required="true">Completed
-          </button>
+          <div class="flex-card-bottom">
+            <div class="card-bottom-left">
+              <button class="upvote" aria-label="Button to upvote ToDo importance" aria-required="true"></button>
+              <button class="downvote" aria-label="Button to downvote ToDo importance" aria-required="true"></button>
+              <h3 class="quality-text">importance:
+                <h4 class="quality">${object.priority}
+                </h4>
+              </h3>
+            </div>
+            <button class="completed-task" aria-label="Button to mark ToDo complete" aria-required="true">Completed
+            </button>
+          </div>
         </article>
         </article>`);
       }
@@ -98,11 +102,19 @@ function htmlNormalCard(object) {
   </header>
   <article class="card-bottom">
     <p class='card-body' contenteditable='true'>${object.body}</p>
-    <button class="upvote" aria-label="Button to upvote ToDo importance" aria-required="true"></button>
-    <button class="downvote" aria-label="Button to downvote ToDo importance" aria-required="true"></button>
-    <h3 class="quality-text">importance:<h4 class="quality">${object.priority}</h4></h3>
-
-    <button class="completed-task" aria-label="Button to mark ToDo complete" aria-required="true">Completed</button>
+    <div class="flex-card-bottom">
+      <div class="card-bottom-left">
+        <button class="upvote" aria-label="Button to upvote ToDo importance" aria-required="true">
+        </button>
+        <button class="downvote" aria-label="Button to downvote ToDo importance" aria-required="true">
+        </button>
+        <h3 class="quality-text">importance:
+          <h4 class="quality">${object.priority}
+          </h4>
+      </h3>
+    </div>
+      <button class="completed-task" aria-label="Button to mark ToDo complete" aria-required="true">Completed</button>
+    </div>
   </article>
 </article>`);
 }

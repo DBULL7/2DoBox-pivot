@@ -54,17 +54,20 @@ $('#show-completed').on('click', function(){
 
       $("#card-section").append(`
         <article id="${object.id}" class="card grayCard">
-        <header>
-        <h1 class="card-title grayedOut" contenteditable='true'>${object.title}</h1>
-        <button class="clear"></button>
+        <header class="card-header">
+          <h1 class="card-title grayedOut" contenteditable='true'>${object.title}</h1>
+          <button class="clear"></button>
         </header>
         <article class="card-bottom">
-        <p class='card-body grayedOut' contenteditable='true'>${object.body}</p>
-        <button class="upvote"></button>
-        <button class="downvote"></button>
-        <h3>quality:<h4 class="quality">${object.priority}</h4></h3>
-
-        <button class="completed-task">Completed</button>
+          <p class='card-body grayedOut' contenteditable='true'>${object.body}</p>
+          <button class="upvote"></button>
+          <button class="downvote"></button>
+          <h3 class="quality-text">importance:
+            <h4 class="quality">${object.priority}
+            </h4>
+          </h3>
+          <button class="completed-task">Completed
+          </button>
         </article>
         </article>`);
       }
@@ -89,7 +92,7 @@ function htmlNormalCard(object) {
 
   $("#card-section").append(`
 <article id="${object.id}" class="card">
-  <header>
+  <header class="card-header">
     <h1 class="card-title" contenteditable='true'>${object.title}</h1>
     <button class="clear"></button>
   </header>
@@ -97,7 +100,7 @@ function htmlNormalCard(object) {
     <p class='card-body' contenteditable='true'>${object.body}</p>
     <button class="upvote"></button>
     <button class="downvote"></button>
-    <h3>quality:<h4 class="quality">${object.priority}</h4></h3>
+    <h3 class="quality-text">importance:<h4 class="quality">${object.priority}</h4></h3>
 
     <button class="completed-task">Completed</button>
   </article>
@@ -167,9 +170,13 @@ $('#title-input, #body-input').on("keydown", function() {
 function changeInputColor(countTitle, countBody) {
   if (countTitle > 120) {
     $('#title-input').css('background-color', 'red')
+  } if (countTitle <= 120) {
+    $('#title-input').css('background-color', 'white')
   }
   if (countBody > 120) {
     $('#body-input').css('background-color', 'red')
+  } if (countBody <= 120) {
+    $('#body-input').css('background-color', 'white')
   }
 }
 

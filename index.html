@@ -17,17 +17,19 @@
         </header>
         <form>
           <input type="text" id="title-input" placeholder="Title">
-          <article id="title-counter">0</article>
+          <article class="counters">Characters: <span id="title-counter">0</span></article>
           <textarea id="body-input" placeholder="Body"></textarea>
-          <article id="body-counter">0</article>
+            <article class="counters">Characters: <span id="body-counter">0</span></article>
           <button id="save-button" disabled="true">save</button>
         </form>
       </main>
-      <aside class="lower-section"> <!-- ok why tf is this an aside???? -->
+      <section class="lower-section">
         <input type="text" id="search" placeholder="Filter">
-        <section class="importance-buttons">
+        <section class="show-buttons">
           <button type="button" id="show-more" class="card-buttons">Show More ToDos</button>
           <button type="button" id="show-completed" class="card-buttons">Show Completed</button>
+        </section>
+        <section class="importance-buttons">
           <button type="button" id="importance-none" class="card-buttons">None</button>
           <button type="button" id="importance-low" class="card-buttons">Low</button>
           <button type="button" id="importance-normal" class="card-buttons">Normal</button>
@@ -39,7 +41,7 @@
         <section id="card-section">
           <!-- New Cards here! -->
         </section>
-      </aside>
+      </section>
     </section>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script>

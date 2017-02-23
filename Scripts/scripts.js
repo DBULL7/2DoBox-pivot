@@ -173,14 +173,14 @@ $('#title-input, #body-input').on("keyup keydown", function() {
 
 function changeInputColor(countTitle, countBody) {
   if (countTitle > 120) {
-    $('#title-input').css('background-color', 'red')
+    $('#title-counter').css('color', '#ed5a5a')
   } if (countTitle <= 120) {
-    $('#title-input').css('background-color', 'white')
+    $('#title-counter').css('color', '#6d6e71')
   }
   if (countBody > 120) {
-    $('#body-input').css('background-color', 'red')
+    $('#body-counter').css('color', '#ed5a5a')
   } if (countBody <= 120) {
-    $('#body-input').css('background-color', 'white')
+    $('#body-counter').css('color', '#6D6E71')
   }
 }
 

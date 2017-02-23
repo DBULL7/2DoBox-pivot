@@ -148,6 +148,10 @@ input[type="text"] {
   height: 25px;
 }
 
+input:focus, textarea:focus {
+ background-color: #FFFFE0 ;
+}
+
 textarea {
   margin-bottom: 0px;
   margin-top: 7px;

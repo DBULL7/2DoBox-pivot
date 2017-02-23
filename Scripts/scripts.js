@@ -11,13 +11,11 @@ $(document).ready(function() {
 
 $('#show-more').on('click', function(){
   printToDo()
-  console.log('???')
 })
 
 
 function hideOverTen() {
   var cards = $('.card')
-
   cards.each(function(i, card) {
     if(i >= 9) {
       $(card).hide()
@@ -25,10 +23,6 @@ function hideOverTen() {
       $(card).show()
     }
   })
-  // var cards = $('.card').val()
-  // cards.each(function(i, val) {
-  //   $(card).nextAll('.card').addClass('hidden')
-  // })
 }
 
 //Card Constructor
@@ -112,7 +106,6 @@ function htmlNormalCard(object) {
 </article>`);
 }
 
-// show completed button - make higher section to store compeleted todos similar  to card-section, then call print to do with identical function that prepends object.completed = true to the new section , also include a completed css class in markup with other prepend to give the completed todos the css
 
 // Completed button
 $('#card-section').on('click', '.completed-task', function() {
@@ -167,6 +160,30 @@ function disableEnter() {
 }
 
 
+$('#title-input').on("keyup", counter)
+
+function counter() {
+  var count = $('#title-input').val().length
+  if (count < 500) {
+    $('#title-counter').text(500 - count)
+  }
+}
+
+$('#body-input').on("keyup", counterBody)
+
+function counterBody() {
+  var count = $('#body-input').val().length
+  if (count < 500) {
+    $('#body-counter').text(500 - count)
+  }
+}
+
+function resetCounters() {
+  $('#body-counter').text(500)
+  $('#title-counter').text(500)
+
+}
+
 ///////////////Save //////////////////////////////////////
 
 $("#save-button").on('click', function(e) {
@@ -179,6 +196,7 @@ $("#save-button").on('click', function(e) {
     storeToDo();
     printToDo();
     clearInput();
+    resetCounters();
     disableEnter();
 })
 
@@ -214,17 +232,7 @@ function upvote() {
       changeImportance(this, qualityVar);
     }
 }
-  // if ($(this).siblings(".quality").text() === "swill") {
-  //     $(this).siblings(".quality").text("plausible");
-  //     qualityVar = "plausible";
-  //     editQuality(this, qualityVar);
-  // } else if ($(this).siblings(".quality").text() === "plausible") {
-  //     $(this).siblings(".quality").text("genius");
-  //     qualityVar = "genius"
-  //     editQuality(this, qualityVar);
-  // } else if ($(this).siblings(".quality").text() === "genius") {
-  //     qualityVar = "genius";
-  // }
+
 
 //Downvote
 $("#card-section").on('click', '.downvote', downvote)
@@ -255,17 +263,6 @@ function downvote() {
     }
 }
 
-  // if ($(this).siblings(".quality").text() === "genius") {
-  //     $(this).siblings(".quality").text("plausible");
-  //     qualityVar = "plausible";
-  //     editQuality(this, qualityVar);
-  // } else if ($(this).siblings(".quality").text() === "plausible") {
-  //     $(this).siblings(".quality").text("swill");
-  //     qualityVar = "swill";
-  //     editQuality(this, qualityVar);
-  // } else if ($(this).siblings(".quality").text() === "plausible") {
-  //     qualityVar = "swill";
-  // }
 
 
 //Stores the new vote quality to local storage
@@ -447,5 +444,3 @@ function findImportanceAll() {
     }
   })
 }
-
-//add key value of completed true/false to card objects.  then have completed button pull card out of local storage, toggle value, then put it back in.  have page load only show completed=false.  have show more completed wipe card section and show all cards regardless of completed = true/false.  actually, completed true will need to display first.

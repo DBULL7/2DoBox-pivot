@@ -64,6 +64,16 @@ article {
   justify-content: center;
 }
 
+.flex-card-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-bottom {
+
+}
+
 #idea-styler {
   color: #00a79d;
 }
